@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdint>
 using namespace std;
 
 unsigned int getLittleEndian(char * arr,int a,int b,int c,int d){

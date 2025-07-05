@@ -33,7 +33,9 @@ int encode(string filename, string outputfile, string secretfilename)
     }
 
     std::uint8_t secretByte;
-    bool hasSecret = secretFile.get(reinterpret_cast<char&>(secretByte));
+    char tmp;
+    bool hasSecret = static_cast<bool>(secretFile.get(tmp));
+    secretByte = static_cast<std::uint8_t>(tmp);
     int index = 1;
     bool putEndMarker = true;
     while (inputFile.get(reinterpret_cast<char&>(imageByte)))
@@ -54,7 +56,12 @@ int encode(string filename, string outputfile, string secretfilename)
                 break;
             case 0:
                 imageByte = (imageByte & 0b11111100) | ((secretByte & 0b11000000) >> 6);
-                hasSecret = secretFile.get(reinterpret_cast<char&>(secretByte)); // load next secret byte
+                if (secretFile.get(tmp)) {
+                    secretByte = static_cast<std::uint8_t>(tmp);
+                    hasSecret = true;
+                } else {
+                    hasSecret = false;
+                }
                 break;
             }
         }
