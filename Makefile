@@ -11,9 +11,3 @@ run:
 
 clear:
 	rm build/* 
-
-install:
-	cp build/$(EXEC) /usr/local/bin/pixelvault
-
-uninstall:
-	rm -f /usr/local/bin/pixelvault
