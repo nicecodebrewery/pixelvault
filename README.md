@@ -19,6 +19,7 @@
 ### 1. Build from source
 
 ```bash
+mkdir build
 make
 ```
 ### Install globally
